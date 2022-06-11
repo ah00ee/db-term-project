@@ -1,0 +1,12 @@
+#title{
+    color: red;
+    text-align: center;
+}
+
+.signin{
+    float: left;
+}
+
+button{
+    height: 50px;
+}

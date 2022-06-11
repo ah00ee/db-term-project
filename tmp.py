@@ -1,0 +1,62 @@
+import sqlite3
+
+"""
+CREATE TABLE Customer 
+	(
+	cid INTEGER NOT NULL,
+	name TEXT,
+	password TEXT NOT NULL,
+	email TEXT,
+	birth_date DATE,
+	sex TEXT,
+    CONSTRAINT Customer_PK PRIMARY KEY(cid)
+	);    
+
+CREATE TABLE Movie 
+	(
+	mid TEXT NOT NULL,
+	title TEXT,
+	open_day TEXT,
+	director TEXT,
+	rating TEXT CHECK(rating IN ('ALL','12','15','18')),
+	length INTEGER,
+    CONSTRAINT Movie_PK PRIMARY KEY(mid)
+	);
+
+CREATE TABLE Actor 
+	(
+	mid TEXT NOT NULL,
+	name TEXT NOT NULL,
+	CONSTRAINT Actor_PK PRIMARY KEY(mid, name),
+	CONSTRAINT Actor_FK FOREIGN KEY (mid) REFERENCES Movie(mid)
+	);
+
+CREATE TABLE Ticketing 
+	(
+	id INTEGER PRIMARY KEY autoincrement,
+	rc_date TEXT,
+	seats INTEGER,
+	status TEXT CHECK(status IN ('R','C','W')),
+	cid INTEGER,
+	sid INTEGER,
+	CONSTRAINT Ticketing_FK1 FOREIGN KEY (cid) REFERENCES Customer(cid),
+	CONSTRAINT Ticketing_FK2 FOREIGN KEY (sid) REFERENCES Schedule(sid)
+	);    
+    
+CREATE TABLE Schedule
+	(
+	sdatetime TIMESTAMP,
+	tname TEXT,
+	mid TEXT,
+	sid INTEGER PRIMARY KEY AUTOINCREMENT,
+	CONSTRAINT Schedule_FK1 FOREIGN KEY (tname) REFERENCES Theater(tname),
+	CONSTRAINT Schedule_FK2 FOREIGN KEY (mid) REFERENCES Movie(mid)
+	);
+    
+CREATE TABLE Theater
+	(
+	tname TEXT NOT NULL,
+	seats INTEGER,
+	CONSTRAINT Theater_PK PRIMARY KEY(tname)
+	);
+""" 
