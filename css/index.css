@@ -2,6 +2,39 @@
     color: red;
     text-align: center;
 }
-#signin{
+#search{
+    text-align: center;
+}
+.div1{
+    float: left;
+    height: 5px;
+    width: 33%;
+}
+.div2{
+    float: left;
+    width: 33%;
+    margin: auto;
+}
+.dvi3{
+    float: left;
+    width: 33%;
+}
+.div3 button{
     float: right;
+}
+.t{
+    list-style: none;
+    border: 1px;
+    border-style: solid;
+    height: 30px;
+    width: 100px;
+}
+.tname{
+    float: left;
+    height: 100%;
+    width: 150px;
+}
+.schedule{
+    float: left;
+    margin-left: 10px;
 }

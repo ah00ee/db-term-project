@@ -18,7 +18,7 @@
         <h2 id="title">CNU CINEMA</h2>
     
         <div class="search">
-            <form action="search.php" method="get">
+            <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
                 <input type="text" id="search" name="movie_title">
                 <input type="submit" value="검색">
             </form>
@@ -39,5 +39,6 @@
     <div>
         <hr>
     </div>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
