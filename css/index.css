@@ -26,15 +26,54 @@
     list-style: none;
     border: 1px;
     border-style: solid;
-    height: 30px;
+    height: 35px;
     width: 100px;
+    text-align: center;
 }
 .tname{
     float: left;
     height: 100%;
-    width: 150px;
+    width: 100px;
+}
+.movie{
+    float: left;
+    padding-left: 0;
+    height: 100%;
+}
+#t1movie, #t2movie, #t3movie, #t4movie, #t5movie{
+    display: none;
 }
 .schedule{
     float: left;
-    margin-left: 10px;
+    height: 100%;
+    padding-left: 0;
+}
+ul{
+    padding: 0;
+    margin: 0;
+}
+.info{
+    list-style: none;
+    border: 1px;
+    border-style: solid;
+    height: 35px;
+    width: 143px;
+    padding-left: 7px;
+}
+.sche{
+    display: none;
+    list-style: none;
+    border: 1px;
+    border-style: solid;
+    height: 35px;
+    width: 200px;
+    padding-left: 7px;
+}
+.date{
+    list-style: none;
+    float: left;
+    border: 1px;
+    border-style: solid;
+    width: 20px;
+    text-align: center;
 }

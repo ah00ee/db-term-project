@@ -1,3 +1,7 @@
+<?php 
+    include('conn.php');
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,13 +24,16 @@
     <div>
         <hr>
     </div>
-    <div class="signin">
-        <form action="signinAfter.php" method="post">
+    <div class="signup">
+        <form action="signinAfter.php" method="post" name="signup" onsubmit="return blankSignUp();">
+            <p><input type="text" name="name" placeholder="NAME"></p>
+            <p><input type="text" name="bday" placeholder="Date of birth(YYYY-MM-DD)"></p>
             <p><input type="text" name="email" placeholder="EMAIL"></p>
             <p><input type="text" name="pwd" placeholder="PASSWORD"></p>
+            <p><input type="text" name="sex" placeholder="SEX"></p>
             <input type="submit" value="회원가입">
         </form>
     </div>
-    <script type="text/javascript" src="js/main.js?after"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

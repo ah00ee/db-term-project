@@ -30,7 +30,7 @@ CREATE TABLE Actor
 
 CREATE TABLE Ticketing 
 	(
-	id INTEGER PRIMARY KEY autoincrement,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	rc_date TEXT,
 	seats INTEGER,
 	status TEXT CHECK(status IN ('R','C','W')),

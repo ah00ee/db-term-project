@@ -24,7 +24,7 @@
         </div>
         <div class="div3" id="signin">
             <button onclick="location.href='signin.html'">로그인</button>
-            
+            <button onclick="location.href='signup.php'">회원가입</button>
         </div>
     </div><br><br>
     <div>

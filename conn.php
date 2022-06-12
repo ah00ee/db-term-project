@@ -11,8 +11,8 @@
         return $results[0]["name"];
     }
 
-    function getTheaterSchedule($db, $tname){
-        $q = $db->query("SELECT theater.tname, movie.open_day, movie.title, schedule.sdatetime, theater.seats FROM Schedule, theater, movie where (schedule.tname=theater.tname and theater.tname='$tname') and schedule.mid=movie.mid and datetime(movie.open_day)>date('2022-05-01');");
+    function getTheaterScheduleR($db, $tname, $movie){
+        $q = $db->query("SELECT theater.tname, movie.title, schedule.sdatetime, theater.seats FROM Schedule, theater, movie WHERE (schedule.tname=theater.tname AND theater.tname='$tname') AND schedule.mid=movie.mid AND (DATETIME(schedule.sdatetime)>=DATE('2022-05-05') AND DATETIME(schedule.sdatetime)<DATE('2022-06-05')) AND movie.title='$movie' ORDER BY movie.title;");
         $results = $q->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
