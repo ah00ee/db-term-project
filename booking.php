@@ -1,3 +1,7 @@
+<?php
+    include ('conn.php');
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +33,25 @@
     <ul>
         <li class="bar"><a href="schedule.php">예매하기</a>
     </ul><br><br>
-    
+    <div>
+        <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="200">
+        <p>
+            <?php
+                $arr = getMovieDetail($db, $t);
+                $open_d = $arr[0];
+                $close_d = $arr[1];
+                if(($open_d[0]["open_day"]<=date("2022-05-05")) and ($close_d[0]["lastdate"]<=date("2022-06-03"))){
+                    echo "<p id='running'>상영중| $t</p>";
+                }
+                else if($close_d[0]["lastdate"]>date("2022-06-03")){
+                    echo "<p id='running'>상영종료| $t</p>";
+                }
+                else{
+                    echo "<p id='running'>상영예정| $t</p>";
+                }
+            ?>
+        </p>
+    </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

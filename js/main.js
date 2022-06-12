@@ -18,18 +18,24 @@ function blankSignUp(){
 }
 
 function show(tNumber){
-    var getSchedule = document.getElementsByClassName("sche");
-    for(var i=0; i < getSchedule.length; i++){
-        getSchedule[i].style.display = "none";
+    for(var i=1; i < 6; i++){
+        var tNum = "t"+i.toString()+"movie";
+        var tBox = "t"+i.toString()+"box";
+        var div = document.getElementById(tBox);
+        if(tNum == tNumber){
+            div.style.backgroundColor = "lightgrey";
+        }
+        else{
+            div.style.backgroundColor = "white";
+        }
     }
     for(var i = 1; i < 6; i++){
         var tNum = "t"+i.toString()+"movie";
+        var div = document.getElementById(tNum);
         if(tNum == tNumber){
-            var div = document.getElementById(tNumber);
             div.style.display = "block";
         }
-        else{
-            var div = document.getElementById(tNum);
+        else{       
             div.style.display = "none";
         }
     } 

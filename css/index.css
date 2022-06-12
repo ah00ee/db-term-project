@@ -1,3 +1,6 @@
+.header{
+    margin-bottom: 3%;
+}
 #title{
     color: red;
     text-align: center;
@@ -8,16 +11,16 @@
 .div1{
     float: left;
     height: 5px;
-    width: 33%;
+    width: 20%;
 }
 .div2{
     float: left;
-    width: 33%;
+    width: 60%;
     margin: auto;
 }
 .dvi3{
     float: left;
-    width: 33%;
+    width: 20%;
 }
 .div3 button{
     float: right;
@@ -34,19 +37,32 @@
     float: left;
     height: 100%;
     width: 100px;
+    padding-left: 0;
 }
 .movie{
     float: left;
     padding-left: 0;
     height: 100%;
 }
-#t1movie, #t2movie, #t3movie, #t4movie, #t5movie{
+#t1box{
+    background-color: lightgrey;
+}
+#t2movie, #t3movie, #t4movie, #t5movie{
     display: none;
 }
-.schedule{
+.sche_box{
     float: left;
     height: 100%;
+    width: 250px;
     padding-left: 0;
+    margin-bottom: 50px;
+    border: 1px;
+    border-style: solid;
+}
+.schedule{
+    width: 200px;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 ul{
     padding: 0;
@@ -74,6 +90,18 @@ ul{
     float: left;
     border: 1px;
     border-style: solid;
-    width: 20px;
+    width: 25px;
     text-align: center;
+}
+.date_select{
+    width: 100%;
+}
+.bar{
+    list-style: none;
+    float: left;
+    border: 1px;
+    border-style: solid;
+    width: 400px;
+    text-align: center;
+    margin-left: 30%;
 }
