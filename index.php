@@ -28,9 +28,7 @@
                 $q=$db->query("SELECT name FROM customer WHERE email='$email' and password='$pw';");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 $name = $results[0]["name"];
-                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button><button onclick=";
-                    session_destroy();
-                echo ">로그아웃</button></div>"
+                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>";
         ?>    
             
         <?php
