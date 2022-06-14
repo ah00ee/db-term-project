@@ -1,5 +1,8 @@
 <?php
     include ('conn.php');
+    $theater = $_GET["theater"];
+    $sche = $_GET["sche"];
+    $t = $_GET["title"];
 ?>
 
 <html lang="en">
@@ -30,27 +33,36 @@
     <div>
         <hr>
     </div>
-    <ul>
-        <li class="bar"><a href="schedule.php">예매하기</a>
-    </ul><br><br>
     <div>
-        <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="200">
+        <li class="bar"><a href="schedule.php">예매하기</a>
+    </div><br><br>
+    <div>
+        <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="50">
         <p>
             <?php
-                $arr = getMovieDetail($db, $t);
-                $open_d = $arr[0];
-                $close_d = $arr[1];
-                if(($open_d[0]["open_day"]<=date("2022-05-05")) and ($close_d[0]["lastdate"]<=date("2022-06-03"))){
-                    echo "<p id='running'>상영중| $t</p>";
-                }
-                else if($close_d[0]["lastdate"]>date("2022-06-03")){
-                    echo "<p id='running'>상영종료| $t</p>";
-                }
-                else{
-                    echo "<p id='running'>상영예정| $t</p>";
-                }
+                echo "$t<br>$sche";
             ?>
         </p>
+    </div>
+    <div>
+        <?php
+            $q = $db->query("SELECT seats FROM theater where tname='$theater';");
+            $results = $q->fetchAll(PDO::FETCH_ASSOC);
+            echo "<table border='1' class='bookingT'>";
+            for($i=0; $i<$results[0]["seats"]/10; $i++){
+                echo "<tr>";
+                for($j=0; $j<10; $j++){
+                    $n = $i*10+$j+1;
+                    echo "<td width='30' class='td_' onclick='clickEvent(event)'>$n</td>";
+                }
+                echo "</tr>";
+            }
+            echo "</table>";
+        ?>
+        <br>
+    </div>
+    <div>
+        <a href="bookingAfter.php"></a>
     </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>

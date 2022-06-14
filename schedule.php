@@ -48,6 +48,7 @@
             <li class="date">15</li>
             <li class="date">16</li>
             <li class="date">17</li>
+            <!--
             <li class="date">18</li>
             <li class="date">19</li>
             <li class="date">20</li>
@@ -65,6 +66,7 @@
             <li class="date">1</li>
             <li class="date">2</li>
             <li class="date">3</li>
+-->
         </ul>
     </div>
     <br><br>
@@ -83,7 +85,7 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $row){
                     $title = $row["title"];
-                    echo "<li class='info' onclick='showSchedule(\"$title\")'>$title</li>";
+                    echo "<li class='t1info' id='t1$title' onclick='showSchedule(\"t1\", \"$title\")'>$title</li>";
 
                 }
             ?>
@@ -95,7 +97,7 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $row){
                     $title = $row["title"];
-                    echo "<li class='info' onclick='showSchedule(\"$title\")'>$title</li>";
+                    echo "<li class='t2info' id='t2$title' onclick='showSchedule(\"t2\", \"$title\")'>$title</li>";
                 }
             ?>
         </ul>
@@ -106,7 +108,7 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $row){
                     $title = $row["title"];
-                    echo "<li class='info' onclick='showSchedule(\"$title\")'>$title</li>";
+                    echo "<li class='t3info' id='t3$title' onclick='showSchedule(\"t3\", \"$title\")'>$title</li>";
                 }
             ?>
         </ul>
@@ -117,7 +119,7 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $row){
                     $title = $row["title"];
-                    echo "<li class='info' onclick='showSchedule(\"$title\")'>$title</li>";
+                    echo "<li class='t4info' id='t4$title' onclick='showSchedule(\"t4\", \"$title\")'>$title</li>";
                 }
             ?>
         </ul>
@@ -128,7 +130,7 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $row){
                     $title = $row["title"];
-                    echo "<li class='info' onclick='showSchedule(\"$title\")'>$title</li>";
+                    echo "<li class='t5info' id='t5$title' onclick='showSchedule(\"t5\", \"$title\")'>$title</li>";
                 }
             ?>
         </ul>
@@ -138,13 +140,13 @@
             <?php
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
-                    echo "<ul class='movie_sche'>";
-                    $t4_sche = getTheaterScheduleR($db, "t1", $title["title"]);
-                    foreach($t4_sche as $row){
-                        $t = $title["title"];
+                    $t = $title["title"];
+                    echo "<ul class='t1movie_sche$t'>";
+                    $t1_sche = getTheaterScheduleR($db, "t1", $t);
+                    foreach($t1_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche' id='$t'><a href='booking.php'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t1&title=$t&sche=$sche'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -154,13 +156,13 @@
             <?php
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
-                    echo "<ul class='movie_sche'>";
-                    $t4_sche = getTheaterScheduleR($db, "t2", $title["title"]);
-                    foreach($t4_sche as $row){
-                        $t = $title["title"];
+                    $t = $title["title"];
+                    echo "<ul class='t2movie_sche$t'>";
+                    $t2_sche = getTheaterScheduleR($db, "t2", $t);
+                    foreach($t2_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche' id='$t'><a href='booking.php'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -170,13 +172,13 @@
             <?php
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
-                    echo "<ul class='movie_sche'>";
-                    $t4_sche = getTheaterScheduleR($db, "t3", $title["title"]);
-                    foreach($t4_sche as $row){
-                        $t = $title["title"];
+                    $t = $title["title"];
+                    echo "<ul class='t3movie_sche$t'>";
+                    $t3_sche = getTheaterScheduleR($db, "t3", $t);
+                    foreach($t3_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche' id='$t'><a href='booking.php'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t3&title=$t&sche=$sche'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -186,13 +188,13 @@
             <?php
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
-                    echo "<ul class='movie_sche'>";
-                    $t4_sche = getTheaterScheduleR($db, "t4", $title["title"]);
+                    $t = $title["title"];
+                    echo "<ul class='t4movie_sche$t'>";
+                    $t4_sche = getTheaterScheduleR($db, "t4", $t);
                     foreach($t4_sche as $row){
-                        $t = $title["title"];
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche' id='$t'><a href='booking.php'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t4&title=$t&sche=$sche'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -202,13 +204,13 @@
             <?php
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
-                    echo "<ul class='movie_sche'>";
-                    $t4_sche = getTheaterScheduleR($db, "t5", $title["title"]);
-                    foreach($t4_sche as $row){
-                        $t = $title["title"];
+                    $t = $title["title"];
+                    echo "<ul class='t5movie_sche$t'>";
+                    $t5_sche = getTheaterScheduleR($db, "t5", $t);
+                    foreach($t5_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche' id='$t'><a href='booking.php'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t5&title=$t&sche=$sche'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }

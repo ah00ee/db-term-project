@@ -17,6 +17,15 @@ function blankSignUp(){
     return true;
 }
 
+function clickEvent(event){
+    if(event.target.classList[1] == "clicked"){
+        event.target.classList.remove("clicked");
+    }
+    else{
+    event.target.classList.add("clicked");
+    }
+}
+
 function show(tNumber){
     for(var i=1; i < 6; i++){
         var tNum = "t"+i.toString()+"movie";
@@ -41,13 +50,36 @@ function show(tNumber){
     } 
 }
 
-function showSchedule(title){
-    var getTitle = document.getElementById(title);
-    var getSchedule = document.getElementsByClassName("sche");
-    for(var i=0; i < getSchedule.length; i++){
-        getSchedule[i].style.display = "none";
+function showSchedule(tNumber, title){
+    var getInfo = document.getElementsByClassName(tNumber+"info");
+    for(var i = 0; i < getInfo.length; i++){
+        getInfo[i].style.backgroundColor = "white";
+    } 
+    var div = document.getElementById(tNumber+title);
+    div.style.backgroundColor = "lightgrey";
+
+    for(var i=1; i < 6; i++){
+        var tNum = "t"+i.toString();
+        var div = document.getElementById(tNum);
+        if(tNum == tNumber){
+            div.style.display = "block";
+        }
+        else{
+            div.style.display = "none";
+        }
     }
-    if(getTitle != null){
-        getTitle.style.display = "block";
+
+    var ul = document.getElementById(tNumber).innerHTML.split("<ul class=");
+    for(var i=0; i < ul.length; i++){
+        var tmp = ul[i].trim(" ");
+        if(tmp!=""){
+            var div = document.getElementsByClassName(tNumber+"movie_sche"+title)[0];
+            if(tmp.match(tmp.substring(13, 13+title.length)+"\"") == null){
+                div.style.display = "none";
+            }
+            else{
+                div.style.display = "block";
+            }
+        }
     }
 }
