@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    $conn = FALSE;
+    if(isset($_SESSION["ID"])){
+        $conn = TRUE;
+    }
+
 	try {
 		$db = new PDO('sqlite:tp.db') or die("cannot open the database");
 	} catch (PDOException $e) {

@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 id="title">CNU CINEMA</h2></a>
+        <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
             <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
@@ -22,10 +22,27 @@
                 <input type="submit" value="검색">
             </form>
         </div>
+        <?php
+            if($conn){
+                $email = $_SESSION["ID"];
+                $pw = $_SESSION["PWD"];
+                $q=$db->query("SELECT name FROM customer WHERE email='$email' and password='$pw';");
+                $results = $q->fetchAll(PDO::FETCH_ASSOC);
+                $name = $results[0]["name"];
+                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button></div>";
+        ?>    
+            
+        <?php
+            }
+            else{
+        ?>
         <div class="div3" id="signin">
-            <button onclick="location.href='signin.html'">로그인</button>
+            <button onclick="location.href='signin.php'">로그인</button>
             <button onclick="location.href='signup.php'">회원가입</button>
         </div>
+        <?php
+            }
+        ?>
     </div><br><br>
     <div>
         <hr>

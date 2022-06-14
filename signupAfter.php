@@ -1,3 +1,18 @@
+<?php 
+    include('conn.php');
+
+    $email = $_POST["email"];
+    $pw = $_POST["pwd"];
+    $name = $_POST["name"];
+    $bday = $_POST["bday"];
+    $sex = $_POST["sex"];
+
+    $q = $db->query("SELECT COUNT(*) FROM customer;");
+    $results = $q->fetchAll(PDO::FETCH_ASSOC);
+    $cnt = $results[0]["COUNT(*)"];
+    $q = $db->exec("INSERT INTO customer values ($cnt, '$name', '$pw', '$email', '$bday', '$sex');");
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +24,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 id="title">CNU CINEMA</h2></a>
+        <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
             <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
@@ -18,18 +33,13 @@
                 <input type="submit" value="검색">
             </form>
         </div>
-        <div class="div3" id="signin">
-            <button onclick="location.href='signin.html'">로그인</button>
-            <button onclick="location.href='signup.php'">회원가입</button>
-        </div>
     </div><br><br>
     <div>
         <hr>
     </div>
-    <ul>
-        <li class="bar"><a href="schedule.php">예매하기</a>
-    </ul><br><br>
-    
+    <div id="signup">
+        <p>회원가입이 완료되었습니다!<br> 다시 로그인 해주시기 바랍니다.</p>
+    </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

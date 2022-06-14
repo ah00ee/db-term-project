@@ -110,6 +110,71 @@ ul{
 .clicked{
     background-color: lightgrey;
 }
-#bookBtn{
-    margin: auto;
+#cnt, .bookBtn{
+    float: left;
+    border: 1px;
+    border-style: solid;
+}
+#cnt{
+    margin-left: 20%;
+    width: 45%;
+    padding-left: 15px;
+}
+.bookBtn{
+    width: 130px;
+    text-align: center;
+}
+#cList, #rList{
+    list-style: none;
+    float: left;
+    border: 1px;
+    border-style: solid;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
+.lists{
+    width: 90%;
+    height: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+.top{
+    width: 90%;
+    height: 40px;
+    margin-bottom: 1px;
+}
+.list-content1{
+    border: 1px;
+    border-style: solid;
+    width: 90%;
+    height: 90%;
+    padding: 30px;
+}
+.list-content2, .bookingL2{
+    display: none;
+    border: 1px;
+    border-style: solid;
+    width: 90%;
+    height: 90%;
+    padding: 30px;
+}
+.bookingL{
+    text-align: center;
+}
+.td__1{
+    width: 90px;   
+}
+.td__2{
+    width: 120px;
+}
+.td__3{
+    width: 150px;
+}
+.td__4{
+    width: 70px;
+}
+.td__5{
+    width: 100px;
 }

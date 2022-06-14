@@ -18,11 +18,54 @@ function blankSignUp(){
 }
 
 function clickEvent(event){
-    if(event.target.classList[1] == "clicked"){
-        event.target.classList.remove("clicked");
+    var tmp = document.getElementsByClassName("clicked");
+    if(tmp.length<10){
+        if(event.target.classList[1] == "clicked"){
+            event.target.classList.remove("clicked");
+        }
+        else{
+            event.target.classList.add("clicked");
+        }
     }
     else{
+        if(event.target.classList[1] == "clicked"){
+            event.target.classList.remove("clicked");
+        }
+        else{
+            alert("예매 가능 좌석 수를 초과하였습니다!");
+        }
+    }
+    document.getElementById("cnt").innerHTML = "선택 좌석 수: "+tmp.length.toString();
+}
+
+function check(event){
+    var tops = document.getElementsByClassName("myList");
+    for(var i=0; i<tops.length; i++){
+        if(tops[i].classList[2] == "clicked"){
+            tops[i].classList.remove("clicked");
+        }
+    }
     event.target.classList.add("clicked");
+
+    var book = document.getElementsByClassName("book content");
+    var cancel = document.getElementsByClassName("cancel content");
+    if(event.target.classList[1] == "cancel"){
+        for(var i=0; i<book.length; i++){
+            book[i].style.display = "none";
+        }
+        for(var i=0; i<cancel.length; i++){
+            document.getElementsByClassName("list-content2")[0].style.display = "block";
+            document.getElementsByClassName("bookingL2")[0].style.display = "block";
+            cancel[i].style.display = "block";
+        }
+    }
+    else{
+        for(var i=0; i<cancel.length; i++){
+            cancel[i].style.display = "none";
+        }
+        for(var i=0; i<book.length; i++){
+            book[i].style.display = "block";
+        }
     }
 }
 
