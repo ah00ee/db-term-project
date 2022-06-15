@@ -1,5 +1,6 @@
 <?php
     include ('conn.php');
+    $date = $_GET["date"];
 ?>
 
 <html lang="en">
@@ -48,7 +49,7 @@
         <hr>
     </div>
     <ul>
-        <li class="bar"><a href="schedule.php">예매하기</a>
+        <li class="bar"><a href="schedule.php?date=2022-05-05">예매하기</a>
     </ul><br><br>
     <div>
         <ul class="date_select">
@@ -89,67 +90,11 @@
     <br><br>
     <div class="tname">
         <ul>
-            <li class="t" id="t1box" onclick="show('t1movie')">t1</li>
-            <li class="t" id="t2box" onclick="show('t2movie')">t2</li>
-            <li class="t" id="t3box" onclick="show('t3movie')">t3</li>
-            <li class="t" id="t4box" onclick="show('t4movie')">t4</li>
-            <li class="t" id="t5box" onclick="show('t5movie')">t5</li>
-        </ul>
-    </div>
-    <div class="movie" id="t1movie">
-        <ul>
-            <?php
-                $results = $db->query("SELECT title FROM movie ORDER BY title;");
-                foreach($results as $row){
-                    $title = $row["title"];
-                    echo "<li class='t1info' id='t1$title' onclick='showSchedule(\"t1\", \"$title\")'>$title</li>";
-
-                }
-            ?>
-        </ul>
-    </div>
-    <div class="movie" id="t2movie">
-        <ul>
-            <?php
-                $results = $db->query("SELECT title FROM movie ORDER BY title;");
-                foreach($results as $row){
-                    $title = $row["title"];
-                    echo "<li class='t2info' id='t2$title' onclick='showSchedule(\"t2\", \"$title\")'>$title</li>";
-                }
-            ?>
-        </ul>
-    </div>
-    <div class="movie" id="t3movie">
-        <ul>
-            <?php
-                $results = $db->query("SELECT title FROM movie ORDER BY title;");
-                foreach($results as $row){
-                    $title = $row["title"];
-                    echo "<li class='t3info' id='t3$title' onclick='showSchedule(\"t3\", \"$title\")'>$title</li>";
-                }
-            ?>
-        </ul>
-    </div>
-    <div class="movie" id="t4movie">
-        <ul>
-            <?php
-                $results = $db->query("SELECT title FROM movie ORDER BY title;");
-                foreach($results as $row){
-                    $title = $row["title"];
-                    echo "<li class='t4info' id='t4$title' onclick='showSchedule(\"t4\", \"$title\")'>$title</li>";
-                }
-            ?>
-        </ul>
-    </div>
-    <div class="movie" id="t5movie">
-        <ul>
-            <?php
-                $results = $db->query("SELECT title FROM movie ORDER BY title;");
-                foreach($results as $row){
-                    $title = $row["title"];
-                    echo "<li class='t5info' id='t5$title' onclick='showSchedule(\"t5\", \"$title\")'>$title</li>";
-                }
-            ?>
+            <li class="t" id="t1box" onclick="show('t1', event)">t1</li>
+            <li class="t" id="t2box" onclick="show('t2', event)">t2</li>
+            <li class="t" id="t3box" onclick="show('t3', event)">t3</li>
+            <li class="t" id="t4box" onclick="show('t4', event)">t4</li>
+            <li class="t" id="t5box" onclick="show('t5', event)">t5</li>
         </ul>
     </div>
     <div class="sche_box">
@@ -158,8 +103,9 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
                     $t = $title["title"];
+                    echo "<h3>$t</h3>";
                     echo "<ul class='t1movie_sche$t'>";
-                    $t1_sche = getTheaterScheduleR($db, "t1", $t);
+                    $t1_sche = getTheaterScheduleR($db, "t1", $t, $date);
                     foreach($t1_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -175,8 +121,9 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
                     $t = $title["title"];
+                    echo "<h3>$t</h3>";
                     echo "<ul class='t2movie_sche$t'>";
-                    $t2_sche = getTheaterScheduleR($db, "t2", $t);
+                    $t2_sche = getTheaterScheduleR($db, "t2", $t, $date);
                     foreach($t2_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -192,8 +139,9 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
                     $t = $title["title"];
+                    echo "<h3>$t</h3>";
                     echo "<ul class='t3movie_sche$t'>";
-                    $t3_sche = getTheaterScheduleR($db, "t3", $t);
+                    $t3_sche = getTheaterScheduleR($db, "t3", $t, $date);
                     foreach($t3_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -209,8 +157,9 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
                     $t = $title["title"];
+                    echo "<h3>$t</h3>";
                     echo "<ul class='t4movie_sche$t'>";
-                    $t4_sche = getTheaterScheduleR($db, "t4", $t);
+                    $t4_sche = getTheaterScheduleR($db, "t4", $t, $date);
                     foreach($t4_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -226,8 +175,9 @@
                 $results = $db->query("SELECT title FROM movie ORDER BY title;");
                 foreach($results as $title){
                     $t = $title["title"];
+                    echo "<h3>$t</h3>";
                     echo "<ul class='t5movie_sche$t'>";
-                    $t5_sche = getTheaterScheduleR($db, "t5", $t);
+                    $t5_sche = getTheaterScheduleR($db, "t5", $t, $date);
                     foreach($t5_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];

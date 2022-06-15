@@ -55,14 +55,29 @@
                 $arr = getMovieDetail($db, $t);
                 $open_d = $arr[0];
                 $close_d = $arr[1];
-                if(($open_d[0]["open_day"]<=date("2022-05-05")) and ($close_d[0]["lastdate"]<=date("2022-06-03"))){
-                    echo "<p id='running'>상영중| $t</p>";
+                $q = $db->query("SELECT movie.title, movie.mid, MIN(DATE(schedule.sdatetime)) as min, MAX(DATE(schedule.sdatetime)) as max FROM schedule, movie WHERE movie.mid=schedule.mid AND movie.title='$t' GROUP BY schedule.mid ORDER BY schedule.mid;");
+                $results = $q->fetchAll(PDO::FETCH_ASSOC);
+                $mid = $results[0]["mid"];
+                $minD = $results[0]["min"];
+                $maxD = $results[0]["max"];
+
+                $q = $db->query("SELECT COUNT(*), SUM(seats) FROM ticketing WHERE sid IN (SELECT s.sid FROM schedule s WHERE s.mid='$mid');");
+                $results = $q->fetchAll(PDO::FETCH_ASSOC);
+                $max = $results[0]["SUM(seats)"];
+                if($max == null){
+                    $max = 0;
                 }
-                else if($close_d[0]["lastdate"]>date("2022-06-03")){
-                    echo "<p id='running'>상영종료| $t</p>";
+                $cnt = $results[0]["COUNT(*)"];
+
+                if($minD<='2022-05-05' && $maxD>='2022-05-05'){
+                    echo "<p id='running'>상영중| $t<br>누적 관객 수| $max<br>예매자 수| $cnt</p>";
+                }
+                else if($maxD<'2022-05-05'){
+                    echo "<p id='running'>상영종료| $t<br>누적 관객 수| $max</p>";
                 }
                 else{
-                    echo "<p id='running'>상영예정| $t</p>";
+                    echo "<p id='running'>상영예정| $t<br>예매자 수| $cnt</p>";
+                    
                 }
             ?>
         </p>

@@ -59,10 +59,15 @@
     border: 1px;
     border-style: solid;
 }
-.schedule{
+#t1{
+    display: block;
     width: 200px;
     padding-left: 20px;
-    padding-top: 20px;
+}
+#t2, #t3, #t4, #t5{
+    display: none;
+    width: 200px;
+    padding-left: 20px;
 }
 ul{
     padding: 0;
@@ -74,15 +79,6 @@ ul{
     border-style: solid;
     height: 35px;
     width: 143px;
-    padding-left: 7px;
-}
-.sche{
-    display: none;
-    list-style: none;
-    border: 1px;
-    border-style: solid;
-    height: 35px;
-    width: 200px;
     padding-left: 7px;
 }
 .date{
@@ -178,4 +174,13 @@ ul{
     margin-top: 25px;
     width: 100px;
     height: 40px;
+}
+.schedule ul li{
+    list-style: none;
+    width: 400px;
+}
+.schedule h3{
+    border: 1px;
+    border-style: solid;
+    font-family: monospace;
 }

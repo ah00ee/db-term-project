@@ -54,7 +54,6 @@ function check(event){
             book[i].style.display = "none";
         }
         for(var i=0; i<cancel.length; i++){
-            //document.getElementsByClassName("list-content2")[0].style.display = "block";
             document.getElementsByClassName("bookingL2")[0].style.display = "block";
             cancel[i].style.display = "block";
         }
@@ -69,60 +68,17 @@ function check(event){
     }
 }
 
-function show(tNumber){
-    for(var i=1; i < 6; i++){
-        var tNum = "t"+i.toString()+"movie";
-        var tBox = "t"+i.toString()+"box";
-        var div = document.getElementById(tBox);
-        if(tNum == tNumber){
-            div.style.backgroundColor = "lightgrey";
+function show(tNumber, event){
+    var t = document.getElementsByClassName("t");
+    var div = document.getElementsByClassName("schedule");
+    for(var i=1; i<6; i++){
+        if("t"+i.toString()==tNumber){
+            t[i-1].style.backgroundColor = "lightgrey";
+            div[i-1].style.display = "block";
         }
         else{
-            div.style.backgroundColor = "white";
-        }
-    }
-    for(var i = 1; i < 6; i++){
-        var tNum = "t"+i.toString()+"movie";
-        var div = document.getElementById(tNum);
-        if(tNum == tNumber){
-            div.style.display = "block";
-        }
-        else{       
-            div.style.display = "none";
-        }
-    } 
-}
-
-function showSchedule(tNumber, title){
-    var getInfo = document.getElementsByClassName(tNumber+"info");
-    for(var i = 0; i < getInfo.length; i++){
-        getInfo[i].style.backgroundColor = "white";
-    } 
-    var div = document.getElementById(tNumber+title);
-    div.style.backgroundColor = "lightgrey";
-
-    for(var i=1; i < 6; i++){
-        var tNum = "t"+i.toString();
-        var div = document.getElementById(tNum);
-        if(tNum == tNumber){
-            div.style.display = "block";
-        }
-        else{
-            div.style.display = "none";
-        }
-    }
-
-    var ul = document.getElementById(tNumber).innerHTML.split("<ul class=");
-    for(var i=0; i < ul.length; i++){
-        var tmp = ul[i].trim(" ");
-        if(tmp!=""){
-            var div = document.getElementsByClassName(tNumber+"movie_sche"+title)[0];
-            if(tmp.match(tmp.substring(13, 13+title.length)+"\"") == null){
-                div.style.display = "none";
-            }
-            else{
-                div.style.display = "block";
-            }
+            t[i-1].style.backgroundColor = "white";
+            div[i-1].style.display = "none";
         }
     }
 }

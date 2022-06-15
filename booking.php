@@ -1,11 +1,4 @@
 <?php
-    if(isset($_SESSION["ID"])){
-        #$session = TRUE;
-        echo "로그인되어있습니다.";
-    }
-    else{
-        echo "로그인이 필요합니다.";
-    }
     include ('conn.php');
     $theater = $_GET["theater"];
     $sche = $_GET["sche"];
@@ -59,7 +52,7 @@
         <hr>
     </div>
     <div>
-        <li class="bar"><a href="schedule.php">예매하기</a>
+        <li class="bar"><a href="schedule.php?date=2022-05-05">예매하기</a>
     </div><br><br>
     <div>
         <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="50">
