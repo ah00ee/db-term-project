@@ -1,3 +1,9 @@
+<!--php 함수 사용을 위한 페이지-->
+<!--
+    session_start()를 통해 로그인 세션 유지.
+    데이터베이스 연결이 이루어짐.
+    다른 .php 파일에서 include('conn.php'); 후 $db 사용 가능.
+-->
 <?php
     session_start();
     $conn = FALSE;

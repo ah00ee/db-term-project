@@ -1,7 +1,14 @@
 function blankSearch(){
     var title = document.forms["search"]["movie_title"].value;
-    if(title==""){
+    var date = document.forms["search"]["s_date"].value;
+
+    if(title=="" && date==""){
         return false;
+    }
+    else if(title!="" && date!=""){
+        var s = "schedule.php?date="+date;
+        document.formform.action = s;
+        
     }
     return true;
 }

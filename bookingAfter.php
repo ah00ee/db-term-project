@@ -1,3 +1,20 @@
+<!--예매 완료 후 나타나는 페이지-->
+<!--
+    예매 완료 후, 사용자에게 예매 완료 메일을 발송(php의 mail()사용.)
+    예매 완료 메일 내용은 다음과 같음.
+
+    //
+    [<예매자> 님 예매 정보]
+    
+    예매 날짜: -
+    예매 영화: -
+    상영관: -
+    상영 날짜 및 시간: -
+    예매 좌석 수: -
+    
+    즐거운 관람되세요.
+    //
+-->
 <?php
     include ('conn.php');
 
@@ -46,7 +63,7 @@
         <div class="div2" id="search">
             <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
                 영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="date">
+                관람일 <input type="date" name="s_date">
                 <input type="submit" value="검색">
             </form>
         </div>

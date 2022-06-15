@@ -11,13 +11,14 @@
     <title>CNU CINEMA</title>
 </head>
 <body>
+    <!--헤더: 로그인 후에는 마이페이지/ 로그인 전에는 회원가입 및 로그인 버튼을 나타냄-->
     <div class="header">
         <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
-            <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
+            <form action="search.php" method="get" id="formform" name="search" onsubmit="return blankSearch();">
                 영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="date">
+                관람일 <input type="date" name="s_date">
                 <input type="submit" value="검색">
             </form>
         </div>

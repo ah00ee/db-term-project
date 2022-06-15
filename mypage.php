@@ -1,3 +1,8 @@
+<!--
+    마이페이지에서 예매내역과 티켓 취소내역을 볼 수 있음 (<table>로 작성)
+    예매 내역에서 취소 버튼을 누르면 취소내역에 추가되고 
+    해당 예매 내역이 사라짐
+-->
 <?php
     include('conn.php');
 ?>
@@ -11,13 +16,14 @@
     <title>CNU CINEMA</title>
 </head>
 <body>
+    <!--헤더: 로그인 후에는 마이페이지/ 로그인 전에는 회원가입 및 로그인 버튼을 나타냄-->
     <div class="header">
         <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
             <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
                 영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="date">
+                관람일 <input type="date" name="s_date">
                 <input type="submit" value="검색">
             </form>
         </div>
@@ -55,6 +61,7 @@
         </div>
         <div class="list-content1 content">
             <?php
+                // 예매 내역 칸
                 $email = $_SESSION["ID"];
                 $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email');");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -85,6 +92,7 @@
                     }
                 }
 
+                // 취소 내역 칸
                 $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') and status='C';");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 if($results == null){

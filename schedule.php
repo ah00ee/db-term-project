@@ -1,3 +1,8 @@
+<!--'예매하기' 버튼을 누르면 나오는 페이지-->
+<!--
+    각 날짜와 상영관에 해당하는 상영 스케줄을 출력함.
+    날짜와 상영관은 선택할 수 클릭하여 변경할 수 있음.
+-->
 <?php
     include ('conn.php');
     $date = $_GET["date"];
@@ -19,7 +24,7 @@
         <div class="div2" id="search">
             <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
                 영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="date">
+                관람일 <input type="date" name="s_date">
                 <input type="submit" value="검색">
             </form>
         </div>

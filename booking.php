@@ -1,3 +1,8 @@
+<!--예매하기의 상영스케줄을 누르면 나타나는 페이지-->
+<!--
+    남은 좌석 수를 보여주고 좌석 수를 선택하여 예매할 수 있도록 함.
+    이때, 선택할 수 있는 좌석 수는 1 이상 10 이하임.
+-->
 <?php
     include ('conn.php');
     $theater = $_GET["theater"];
@@ -22,7 +27,7 @@
         <div class="div2" id="search">
             <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
                 영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="date">
+                관람일 <input type="date" name="s_date">
                 <input type="submit" value="검색">
             </form>
         </div>
@@ -64,6 +69,8 @@
     </div>
     <div>
         <?php
+            // 남은 좌석 수 계산을 위함.
+            // $seats-$max = (상영관의 총 좌석수)-(예매된 좌석 수)
             $q = $db->query("SELECT seats FROM theater WHERE tname='$theater';");
             $results = $q->fetchAll(PDO::FETCH_ASSOC);
             $seats = $results[0]["seats"];
@@ -73,6 +80,7 @@
         ?>
         <br>
     </div>
+    <!--예매 칸-->
     <div class="btm">
         <form action="bookingAfter.php?sid=<?php echo "$sid"?>" name="cnt" id="cnt" method="post">
             <div class="btm1">
