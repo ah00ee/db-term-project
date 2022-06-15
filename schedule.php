@@ -163,7 +163,8 @@
                     foreach($t1_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t1&title=$t&sche=$sche'>$sche, $seats</a></li>";
+                        $sid = $row["sid"];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -179,7 +180,8 @@
                     foreach($t2_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche'>$sche, $seats</a></li>";
+                        $sid = $row["sid"];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -195,7 +197,8 @@
                     foreach($t3_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t3&title=$t&sche=$sche'>$sche, $seats</a></li>";
+                        $sid = $row["sid"];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -211,7 +214,8 @@
                     foreach($t4_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t4&title=$t&sche=$sche'>$sche, $seats</a></li>";
+                        $sid = $row["sid"];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -227,7 +231,8 @@
                     foreach($t5_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t5&title=$t&sche=$sche'>$sche, $seats</a></li>";
+                        $sid = $row["sid"];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
                     }
                     echo "</ul>";
                 }

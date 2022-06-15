@@ -110,19 +110,13 @@ ul{
 .clicked{
     background-color: lightgrey;
 }
-#cnt, .bookBtn{
+#cnt{
     float: left;
     border: 1px;
     border-style: solid;
-}
-#cnt{
-    margin-left: 20%;
-    width: 45%;
+    margin: auto;
+    width: 500px;
     padding-left: 15px;
-}
-.bookBtn{
-    width: 130px;
-    text-align: center;
 }
 #cList, #rList{
     list-style: none;
@@ -152,16 +146,14 @@ ul{
     height: 90%;
     padding: 30px;
 }
-.list-content2, .bookingL2{
+.bookingL2{
     display: none;
-    border: 1px;
-    border-style: solid;
-    width: 90%;
-    height: 90%;
-    padding: 30px;
 }
 .bookingL{
     text-align: center;
+}
+.cancel content{
+    display: none;
 }
 .td__1{
     width: 90px;   
@@ -177,4 +169,13 @@ ul{
 }
 .td__5{
     width: 100px;
+}
+.btm1{
+    float: left;
+}
+#bookingBtn{
+    margin-left: 150px;
+    margin-top: 25px;
+    width: 100px;
+    height: 40px;
 }

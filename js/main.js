@@ -54,7 +54,7 @@ function check(event){
             book[i].style.display = "none";
         }
         for(var i=0; i<cancel.length; i++){
-            document.getElementsByClassName("list-content2")[0].style.display = "block";
+            //document.getElementsByClassName("list-content2")[0].style.display = "block";
             document.getElementsByClassName("bookingL2")[0].style.display = "block";
             cancel[i].style.display = "block";
         }

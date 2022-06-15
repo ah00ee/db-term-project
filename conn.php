@@ -1,11 +1,9 @@
 <?php
     session_start();
     $conn = FALSE;
-    echo $conn;
     if(isset($_SESSION["ID"])){
         $conn = TRUE;
     }
-    echo $conn;
 
 	try {
 		$db = new PDO('sqlite:tp.db') or die("cannot open the database");
@@ -20,7 +18,7 @@
     }
 
     function getTheaterScheduleR($db, $tname, $movie){
-        $q = $db->query("SELECT theater.tname, schedule.sdatetime, theater.seats FROM Schedule, theater, movie WHERE (schedule.tname=theater.tname AND theater.tname='$tname') AND schedule.mid=movie.mid AND (DATETIME(schedule.sdatetime)>=DATE('2022-05-05') AND DATETIME(schedule.sdatetime)<DATE('2022-06-05')) AND movie.title='$movie' ORDER BY movie.title;");
+        $q = $db->query("SELECT theater.tname, schedule.sid, schedule.sdatetime, theater.seats FROM Schedule, theater, movie WHERE (schedule.tname=theater.tname AND theater.tname='$tname') AND schedule.mid=movie.mid AND (DATETIME(schedule.sdatetime)>=DATE('2022-05-05') AND DATETIME(schedule.sdatetime)<DATE('2022-06-05')) AND movie.title='$movie' ORDER BY movie.title;");
         $results = $q->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }

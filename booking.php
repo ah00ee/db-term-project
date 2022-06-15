@@ -2,7 +2,6 @@
     if(isset($_SESSION["ID"])){
         #$session = TRUE;
         echo "로그인되어있습니다.";
-        session_destroy();
     }
     else{
         echo "로그인이 필요합니다.";
@@ -11,6 +10,7 @@
     $theater = $_GET["theater"];
     $sche = $_GET["sche"];
     $t = $_GET["title"];
+    $sid = $_GET["sid"];
 ?>
 
 <html lang="en">
@@ -71,28 +71,25 @@
     </div>
     <div>
         <?php
-            $q = $db->query("SELECT seats FROM theater where tname='$theater';");
+            $q = $db->query("SELECT seats FROM theater WHERE tname='$theater';");
             $results = $q->fetchAll(PDO::FETCH_ASSOC);
-            echo "<table border='1' class='bookingT'>";
-            for($i=0; $i<$results[0]["seats"]/10; $i++){
-                echo "<tr>";
-                for($j=0; $j<10; $j++){
-                    $n = $i*10+$j+1;
-                    echo "<td width='30' class='td_' onclick='clickEvent(event)'>$n</td>";
-                }
-                echo "</tr>";
-            }
-            echo "</table>";
+            $seats = $results[0]["seats"];
+            $q = $db->query("SELECT SUM(seats) FROM ticketing WHERE sid=$sid;");
+            $results = $q->fetchAll(PDO::FETCH_ASSOC);
+            $max = $results[0]["SUM(seats)"];
         ?>
         <br>
     </div>
     <div class="btm">
-        <div id="cnt">
-            선택 좌석 수: 0
-        </div>
-        <div class="bookBtn">
-            <a href="bookingAfter.php">예매</a>
-        </div>
+        <form action="bookingAfter.php?sid=<?php echo "$sid"?>" name="cnt" id="cnt" method="post">
+            <div class="btm1">
+                <p><?php echo "남은 좌석 수: "; echo strval($seats-$max);?></p>
+                <p>선택 좌석 수: <input type="number" name="number" min="1" max="10"></p>
+            </div>
+            <div class="btm1">
+                <input type="submit" id="bookingBtn" value="예매">
+            </div>
+        </form>
     </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
