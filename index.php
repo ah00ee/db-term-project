@@ -17,9 +17,13 @@
         <div class="div1"></div>
         <div class="div2" id="search">
             <form action="search.php" method="get" id="formform" name="search" onsubmit="return blankSearch();">
-                영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="s_date">
-                <input type="submit" value="검색">
+                <div id="in">
+                    <li>영화제목 <input type="text" id="search" name="movie_title"></li>
+                    <li>관람일 <input type="date" name="s_date"></li>
+                </div>
+                <div id="s">
+                    <input type="submit" value="검색">
+                </div>
             </form>
         </div>
         <?php
@@ -29,7 +33,8 @@
                 $q=$db->query("SELECT name FROM customer WHERE email='$email' and password='$pw';");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 $name = $results[0]["name"];
-                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>";
+                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>
+                                    <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
         ?>    
             
         <?php

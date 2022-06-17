@@ -25,10 +25,14 @@
         <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
-            <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
-                영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="s_date">
-                <input type="submit" value="검색">
+            <form action="search.php" method="get" id="formform" name="search" onsubmit="return blankSearch();">
+                <div id="in">
+                    <li>영화제목 <input type="text" id="search" name="movie_title"></li>
+                    <li>관람일 <input type="date" name="s_date"></li>
+                </div>
+                <div id="s">
+                    <input type="submit" value="검색">
+                </div>
             </form>
         </div>
         <?php
@@ -38,7 +42,8 @@
                 $q=$db->query("SELECT name FROM customer WHERE email='$email' and password='$pw';");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 $name = $results[0]["name"];
-                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button></div>";
+                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>
+                                    <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
         ?>    
             
         <?php
@@ -86,7 +91,18 @@
         <form action="bookingAfter.php?sid=<?php echo "$sid"?>" name="cnt" id="cnt" method="post">
             <div class="btm1">
                 <p><?php echo "남은 좌석 수: "; echo strval($seats-$max);?></p>
+                <?php
+                    if($seats-$max<10){
+                ?>
+                <p>선택 좌석 수: <input type="number" name="number" min="1" max="<?php echo $seats-$max?>"></p>
+                <?php
+                    }
+                    else{
+                ?>
                 <p>선택 좌석 수: <input type="number" name="number" min="1" max="10"></p>
+                <?php
+                    }
+                ?>
             </div>
             <div class="btm1">
                 <input type="submit" id="bookingBtn" value="예매">

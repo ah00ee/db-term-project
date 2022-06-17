@@ -29,10 +29,14 @@
         <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
-            <form action="search.php" method="get" name="search" onsubmit="return blankSearch();">
-                영화제목 <input type="text" id="search" name="movie_title">
-                관람일 <input type="date" name="s_date">
-                <input type="submit" value="검색">
+            <form action="search.php" method="get" id="formform" name="search" onsubmit="return blankSearch();">
+                <div id="in">
+                    <li>영화제목 <input type="text" id="search" name="movie_title"></li>
+                    <li>관람일 <input type="date" name="s_date"></li>
+                </div>
+                <div id="s">
+                    <input type="submit" value="검색">
+                </div>
             </form>
         </div>
         <?php
@@ -42,7 +46,8 @@
                 $q=$db->query("SELECT name FROM customer WHERE email='$email' and password='$pw';");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 $name = $results[0]["name"];
-                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button></div>";
+                echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>
+                                    <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
         ?>    
             
         <?php
@@ -72,7 +77,7 @@
             <?php
                 // 예매 내역 칸
                 $email = $_SESSION["ID"];
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R'ORDER BY rc_date DESC;");
+                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R' ORDER BY rc_date DESC;");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
 
                 if($results == null){
@@ -83,9 +88,10 @@
                             <tr>
                                 <td class='td__1'>예매번호</td>
                                 <td class='td__2'>영화제목</td>
-                                <td class='td__3'>예매날짜</td>
-                                <td class='td__4'>좌석 수</td>
-                                <td class='td__5'>취소</td>
+                                <td class='td__3'>상영관</td>
+                                <td class='td__4'>예매날짜</td>
+                                <td class='td__5'>좌석 수</td>
+                                <td class='td__6'>취소</td>
                             </tr>";
                     foreach($results as $row){
                         echo "<tr>";
@@ -94,21 +100,24 @@
                         $seats = $row["seats"];
                         $status = $row["status"];
                         $sid = $row["sid"];
-                        $tmp=$db->query("SELECT title FROM movie WHERE mid=(SELECT mid FROM schedule WHERE sid=$sid);");
+                        $tmp=$db->query("SELECT m.title, s.tname FROM movie m, schedule s WHERE m.mid=s.mid AND s.sid=$sid;");
                         $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
                         $title = $r[0]["title"];
+                        $tname = $r[0]["tname"];
                         $cancelId = 0;
                         echo "<td class='td__1'>$id</td>
                             <td class='td__2'>$title</td>
-                            <td class='td__3'>$rc_date</td>
-                            <td class='td__4'>$seats</td>
-                            <td class='td__5'><a href='mypage.php?id=$id'>취소하기</a></td></tr>";
+                            <td class='td__3'>$tname</td>
+                            <td class='td__4'>$rc_date</td>
+                            <td class='td__5'>$seats</td>
+                            <td class='td__6'><a href='mypage.php?id=$id'>취소하기</a></td>
+                        </tr>";
                     }
                 }
 
                 // 지난 관람 내역 칸
                 $email = $_SESSION["ID"];
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W'ORDER BY rc_date DESC;");
+                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W' ORDER BY rc_date DESC;");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
 
                 if($results == null){
@@ -119,8 +128,9 @@
                             <tr>
                                 <td class='td__1'>예매번호</td>
                                 <td class='td__2'>영화제목</td>
-                                <td class='td__3'>예매날짜</td>
-                                <td class='td__4'>좌석 수</td>
+                                <td class='td__3'>상영관</td>
+                                <td class='td__4'>예매날짜</td>
+                                <td class='td__5'>좌석 수</td>
                             </tr>";
                     foreach($results as $row){
                         echo "<tr>";
@@ -128,31 +138,34 @@
                         $rc_date = $row["rc_date"];
                         $seats = $row["seats"];
                         $status = $row["status"];
-                        $sid = $row["sid"];
-                        $tmp=$db->query("SELECT title FROM movie WHERE mid=(SELECT mid FROM schedule WHERE sid=$sid);");
+                        $sid = (int)$row["sid"];
+                        $tmp=$db->query("SELECT m.title, s.tname FROM movie m, schedule s WHERE m.mid=s.mid AND s.sid=$sid;");
                         $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
                         $title = $r[0]["title"];
+                        $tname = $r[0]["tname"];
                         $cancelId = 0;
                         echo "<td class='td__1'>$id</td>
                             <td class='td__2'>$title</td>
-                            <td class='td__3'>$rc_date</td>
-                            <td class='td__4'>$seats</td>";
+                            <td class='td__3'>$tname</td>
+                            <td class='td__4'>$rc_date</td>
+                            <td class='td__5'>$seats</td>";
                     }
                 }
 
                 // 취소 내역 칸
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') and status='C';");
+                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') and status='C' ORDER BY rc_date DESC;");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 if($results == null){
-                    echo "<h2 class='bookingL2 cancel content'>취소 내역이 없습니다.</h2>";
+                    echo "<h2 class='bookingL3 cancel content'>취소 내역이 없습니다.</h2>";
                 }
                 else{
                     echo "<table border='1' class='bookingL3 cancel content'>
                             <tr>
                                 <td class='td__1'>예매번호</td>
                                 <td class='td__2'>영화제목</td>
-                                <td class='td__3'>예매날짜</td>
-                                <td class='td__4'>좌석 수</td>
+                                <td class='td__3'>상영관</td>
+                                <td class='td__4'>예매날짜</td>
+                                <td class='td__5'>좌석 수</td>
                             </tr>";
                     foreach($results as $row){
                         echo "<tr>";
@@ -161,13 +174,15 @@
                         $seats = $row["seats"];
                         $status = $row["status"];
                         $sid = $row["sid"];
-                        $tmp=$db->query("SELECT title FROM movie WHERE mid=(SELECT mid FROM schedule WHERE sid=$sid);");
+                        $tmp=$db->query("SELECT m.title, s.tname FROM movie m, schedule s WHERE m.mid=s.mid AND s.sid=$sid;");
                         $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
                         $title = $r[0]["title"];
+                        $tname = $r[0]["tname"];
                         echo "<td class='td__1'>$id</td>
                             <td class='td__2'>$title</td>
-                            <td class='td__3'>$rc_date</td>
-                            <td class='td__4'>$seats</td>
+                            <td class='td__3'>$tname</td>
+                            <td class='td__4'>$rc_date</td>
+                            <td class='td__5'>$seats</td>
                             </tr>";
                     }
                 }
