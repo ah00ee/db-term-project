@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
+    <h1 id="title"><a href="/index.php">CNU CINEMA</a></h1>
         <div class="div1"></div>
         <div class="div2" id="search">
             <form action="search.php" method="get" id="formform" name="search" onsubmit="return blankSearch();">
@@ -62,7 +62,7 @@
         <hr>
     </div>
     <div>
-        <li class="bar"><a href="schedule.php">예매하기</a>
+        <li class="bar"><a href="schedule.php?date=2022-05-05">예매하기</a>
     </div><br><br>
     <div>
         <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="50">

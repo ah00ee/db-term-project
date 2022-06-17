@@ -136,26 +136,28 @@ ul{
     width: 500px;
     padding-left: 15px;
 }
-#cList, #rList, #wList{
+.top ul li{
     list-style: none;
     float: left;
     border: 1px;
     border-style: solid;
-    width: 150px;
-    height: 30px;
+    width: 33%;
+    height: 35px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 5px;
 }
 .lists{
     width: 90%;
     height: 90%;
     margin-left: 5%;
     margin-top: 20px;
+    margin: auto;
 }
 .top{
     width: 90%;
     height: 40px;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
+    margin: auto;
 }
 .list-content1{
     border: 1px;
@@ -163,6 +165,7 @@ ul{
     width: 90%;
     height: 90%;
     padding: 30px;
+    margin: auto;
 }
 .bookingL{
     text-align: center;
@@ -219,4 +222,22 @@ ul{
 }
 .div2 li{
     list-style: none;
+}
+#rec{
+    margin: auto;
+    text-align: center;
+}
+.admin_top{
+    border: 1px;
+    border-style: solid;
+    width: 90%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    margin: auto;
+    margin-bottom: 3px;
+    text-align: center;
+}
+#admin_s{
+    margin-left: 4px;
 }

@@ -65,15 +65,20 @@
     <div>
         <hr>
     </div>
-    <?php
-        if($conn&&!$admin){
-    ?>
-            <ul>
-                <li class="bar"><a href="schedule.php?date=<?php echo $today;?>">예매하기</a>
-            </ul><br><br>
-    <?php
-        }
-    ?>
+    <div id="rec">
+        <h3>영화 관람 기록</h3>
+    </div>
+    <div class="lists">
+        <div class="admin_top">
+            <form action="" name="check">
+                <input type="checkbox" name="whole">전체
+                <input type="checkbox" name="r">예매
+                <input type="checkbox" name="w">관람
+                <input type="checkbox" name="c">취소
+                <input type="submit" id="admin_s" name="admin_s" value="검색하기">
+            </form>
+        </div>
+    </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

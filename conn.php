@@ -7,7 +7,12 @@
 <?php
     session_start();
     $conn = FALSE;
+    $admin = FALSE;
     if(isset($_SESSION["ID"])){
+        if($_SESSION["ID"] == "administrator"){
+            // 관리자 계정 확인
+            $admin = TRUE;
+        }
         $conn = TRUE;
     }
 
