@@ -5,6 +5,7 @@
 
     $_SESSION['ID'] = $email;
     $_SESSION['PWD'] = $pwd;
+    $_SESSION["DATE"] = '2022-05-05';
 ?>
 
 <html lang="en">

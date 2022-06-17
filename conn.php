@@ -33,27 +33,4 @@
         $results = $q->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
-
-    function getMovieDetail($db, $t){
-        #open_day
-        $o = $db->query("SELECT open_day FROM movie WHERE title='$t';");
-        $results_o = $o->fetchAll(PDO::FETCH_ASSOC);
-        
-        #close_day
-        $c = $db->query("SELECT s.mid, MAX(s.sdatetime) as lastdate FROM schedule s GROUP BY s.mid");
-        $results_c = $c->fetchAll(PDO::FETCH_ASSOC);
-        return array($results_o, $results_c);
-    }
-
-    function status($status){
-        if($status == 'R'){
-            echo "관람 전";
-        }
-        else if($status == 'W'){
-            echo "관람 완료";
-        }
-        else{   // $status == 'C'
-            echo "취소됨";
-        }
-    }
 ?>

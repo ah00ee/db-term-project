@@ -62,7 +62,7 @@
         <hr>
     </div>
     <div>
-        <li class="bar"><a href="schedule.php?date=2022-05-05">예매하기</a>
+        <li class="bar"><a href="schedule.php">예매하기</a>
     </div><br><br>
     <div>
         <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="50">

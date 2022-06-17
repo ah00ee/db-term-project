@@ -9,7 +9,6 @@ function blankSearch(){
     else if(title!="" && date!=""){
         var s = "schedule.php?date="+date;
         document.formform.action = s;
-        
     }
     return true;
 }
@@ -24,27 +23,6 @@ function blankSignUp(){
         }
     }
     return true;
-}
-
-function clickEvent(event){
-    var tmp = document.getElementsByClassName("clicked");
-    if(tmp.length<10){
-        if(event.target.classList[1] == "clicked"){
-            event.target.classList.remove("clicked");
-        }
-        else{
-            event.target.classList.add("clicked");
-        }
-    }
-    else{
-        if(event.target.classList[1] == "clicked"){
-            event.target.classList.remove("clicked");
-        }
-        else{
-            alert("예매 가능 좌석 수를 초과하였습니다!");
-        }
-    }
-    document.getElementById("cnt").innerHTML = "선택 좌석 수: "+tmp.length.toString();
 }
 
 function check(event){
@@ -115,4 +93,13 @@ function show(tNumber){
             div[i-1].style.display = "none";
         }
     }
+}
+
+function dateChange(event){
+    var date = event.target;
+    var dates = document.getElementsByClassName("date");
+    for(var i=0; i<dates.length; i++){
+        dates[i].classList.remove("clicked");
+    }
+    date.classList.add("clicked");
 }

@@ -1,5 +1,11 @@
 <?php
     include ('conn.php');
+    if(isset($_SESSION["DATE"])){
+        $today = $_SESSION["DATE"];
+    }
+    else{
+        $today = '2022-05-05';
+    }
 ?>
 <html lang="en">
 <head>
@@ -53,7 +59,7 @@
         <hr>
     </div>
     <ul>
-        <li class="bar"><a href="schedule.php?date=2022-05-05">예매하기</a>
+        <li class="bar"><a href="schedule.php?date=<?php echo $today;?>">예매하기</a>
     </ul><br><br>
     
     <script type="text/javascript" src="js/main.js"></script>

@@ -5,7 +5,15 @@
 -->
 <?php
     include ('conn.php');
-    $date = $_GET["date"];
+    if(isset($_SESSION["DATE"])){
+        $today = $_SESSION["DATE"];
+    }
+    else{
+        $today = '2022-05-05';
+    }
+    if(isset($_GET["date"])){
+        $set_today = $_GET["date"];
+    }
 ?>
 
 <html lang="en">
@@ -59,42 +67,18 @@
         <hr>
     </div>
     <ul>
-        <li class="bar"><a href="schedule.php?date=2022-05-05">예매하기</a>
+        <li class="bar"><a href="schedule.php">예매하기</a>
     </ul><br><br>
     <div>
         <ul class="date_select">
-            <li class="date">5</li>
-            <li class="date">6</li>
-            <li class="date">7</li>
-            <li class="date">8</li>
-            <li class="date">9</li>
-            <li class="date">10</li>
-            <li class="date">11</li>
-            <li class="date">12</li>
-            <li class="date">13</li>
-            <li class="date">14</li>
-            <li class="date">15</li>
-            <li class="date">16</li>
-            <li class="date">17</li>
-            <!--
-            <li class="date">18</li>
-            <li class="date">19</li>
-            <li class="date">20</li>
-            <li class="date">21</li>
-            <li class="date">22</li>
-            <li class="date">23</li>
-            <li class="date">24</li>
-            <li class="date">25</li>
-            <li class="date">26</li>
-            <li class="date">27</li>
-            <li class="date">28</li>
-            <li class="date">29</li>
-            <li class="date">30</li>
-            <li class="date">31</li>
-            <li class="date">1</li>
-            <li class="date">2</li>
-            <li class="date">3</li>
--->
+            <?php
+                // 현재 날짜부터 14일간의 스케줄을 확인할 수 있음.
+                for($i=0; $i<14; $i++){
+                    $set_date = strval(date("Y-m-d", strtotime("$today+$i days")));
+                    $set = strval(date("j", strtotime($set_date)));
+                    echo "<li class='date' id=$set_date onclick='dateChange(event)'><a href='schedule.php?date=$set_date'>".$set."</a></li>";
+                }
+            ?>
         </ul>
     </div>
     <br><br>
@@ -115,7 +99,7 @@
                     $t = $title["title"];
                     echo "<h3>$t</h3>";
                     echo "<ul class='t1movie_sche$t'>";
-                    $t1_sche = getTheaterScheduleR($db, "t1", $t, $date);
+                    $t1_sche = getTheaterScheduleR($db, "t1", $t, $set_today);
                     foreach($t1_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -133,7 +117,7 @@
                     $t = $title["title"];
                     echo "<h3>$t</h3>";
                     echo "<ul class='t2movie_sche$t'>";
-                    $t2_sche = getTheaterScheduleR($db, "t2", $t, $date);
+                    $t2_sche = getTheaterScheduleR($db, "t2", $t, $set_today);
                     foreach($t2_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -151,7 +135,7 @@
                     $t = $title["title"];
                     echo "<h3>$t</h3>";
                     echo "<ul class='t3movie_sche$t'>";
-                    $t3_sche = getTheaterScheduleR($db, "t3", $t, $date);
+                    $t3_sche = getTheaterScheduleR($db, "t3", $t, $set_today);
                     foreach($t3_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -169,7 +153,7 @@
                     $t = $title["title"];
                     echo "<h3>$t</h3>";
                     echo "<ul class='t4movie_sche$t'>";
-                    $t4_sche = getTheaterScheduleR($db, "t4", $t, $date);
+                    $t4_sche = getTheaterScheduleR($db, "t4", $t, $set_today);
                     foreach($t4_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -187,7 +171,7 @@
                     $t = $title["title"];
                     echo "<h3>$t</h3>";
                     echo "<ul class='t5movie_sche$t'>";
-                    $t5_sche = getTheaterScheduleR($db, "t5", $t, $date);
+                    $t5_sche = getTheaterScheduleR($db, "t5", $t, $set_today);
                     foreach($t5_sche as $row){
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
@@ -199,7 +183,6 @@
             ?>
         </div>
     </div>
-    
     <script type="text/javascript" src="js/main.js?after"></script>
 </body>
 </html>
