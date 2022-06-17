@@ -71,10 +71,11 @@
         <?php
             // 남은 좌석 수 계산을 위함.
             // $seats-$max = (상영관의 총 좌석수)-(예매된 좌석 수)
+            // (예매된 좌석 수) = 같은 sid를 가진 티켓팅 내역의 seats의 합. 이때, 취소표는 제외.
             $q = $db->query("SELECT seats FROM theater WHERE tname='$theater';");
             $results = $q->fetchAll(PDO::FETCH_ASSOC);
             $seats = $results[0]["seats"];
-            $q = $db->query("SELECT SUM(seats) FROM ticketing WHERE sid=$sid;");
+            $q = $db->query("SELECT SUM(seats) FROM ticketing WHERE sid=$sid AND status!='C';");
             $results = $q->fetchAll(PDO::FETCH_ASSOC);
             $max = $results[0]["SUM(seats)"];
         ?>

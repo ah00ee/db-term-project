@@ -44,4 +44,16 @@
         $results_c = $c->fetchAll(PDO::FETCH_ASSOC);
         return array($results_o, $results_c);
     }
+
+    function status($status){
+        if($status == 'R'){
+            echo "관람 전";
+        }
+        else if($status == 'W'){
+            echo "관람 완료";
+        }
+        else{   // $status == 'C'
+            echo "취소됨";
+        }
+    }
 ?>

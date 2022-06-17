@@ -44,9 +44,7 @@
     $headers = "From: nay0901@naver.com\r\n";
     mail($to, $subject, $content, $headers);
 ?>
-<?php
-    include ('conn.php');
-?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -92,7 +90,9 @@
     <div>
         <hr>
     </div>
-    <h3>예매 완료</h3>
+    <br>
+    <h3 id="confirmed">예매 완료</h3>
+    <button>예매 내역 확인</button>
     
     <script type="text/javascript" src="js/main.js"></script>
 </body>

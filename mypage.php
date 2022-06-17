@@ -5,6 +5,14 @@
 -->
 <?php
     include('conn.php');
+
+    // '취소하기' 버튼 클릭 시,
+    // 예매 내역 취소 진행. => update table set status='C' where id=id;
+    if(array_key_exists('id', $_GET)){
+        $bookId = $_GET["id"];
+        $q = $db->exec("UPDATE ticketing SET status='C' WHERE id=$bookId;");
+        echo "<script>location.href='http://localhost/mypage.php'</script>";
+    }
 ?>
 <html lang="en">
 <head>
@@ -55,15 +63,16 @@
     <div class="lists">
         <div class="top">
             <ul>
-                <li class="myList book clicked" id="rList" onclick="check(event)">예매내역</li>
-                <li class="myList cancel" id="cList"  onclick="check(event)">취소내역</li>
+                <li class="myList book clicked" id="rList" onclick="check(event)">예매 내역</li>
+                <li class="myList watch" id="wList" onclick="check(event)">지난 관람 내역</li>
+                <li class="myList cancel" id="cList"  onclick="check(event)">취소 내역</li>
             </ul>
         </div>
         <div class="list-content1 content">
             <?php
                 // 예매 내역 칸
                 $email = $_SESSION["ID"];
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email');");
+                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R'ORDER BY rc_date DESC;");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
 
                 if($results == null){
@@ -76,7 +85,7 @@
                                 <td class='td__2'>영화제목</td>
                                 <td class='td__3'>예매날짜</td>
                                 <td class='td__4'>좌석 수</td>
-                                <td class='td__5'>티켓상태</td>
+                                <td class='td__5'>취소</td>
                             </tr>";
                     foreach($results as $row){
                         echo "<tr>";
@@ -88,18 +97,25 @@
                         $tmp=$db->query("SELECT title FROM movie WHERE mid=(SELECT mid FROM schedule WHERE sid=$sid);");
                         $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
                         $title = $r[0]["title"];
-                        echo "<td class='td__1'>$id</td><td class='td__2'>$title</td><td class='td__3'>$rc_date</td><td class='td__4'>$seats</td><td class='td__5'>$status</td>";
+                        $cancelId = 0;
+                        echo "<td class='td__1'>$id</td>
+                            <td class='td__2'>$title</td>
+                            <td class='td__3'>$rc_date</td>
+                            <td class='td__4'>$seats</td>
+                            <td class='td__5'><a href='mypage.php?id=$id'>취소하기</a></td></tr>";
                     }
                 }
 
-                // 취소 내역 칸
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') and status='C';");
+                // 지난 관람 내역 칸
+                $email = $_SESSION["ID"];
+                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W'ORDER BY rc_date DESC;");
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
+
                 if($results == null){
-                    echo "<h2 class='bookingL2 cancel content'>취소 내역이 없습니다.</h2>";
+                    echo "<h2 class='bookingL2 watch content'>지난 관람 내역이 없습니다.</h2>";
                 }
                 else{
-                    echo "<table border='1' class='bookingL2 cancel content'>
+                    echo "<table border='1' class='bookingL2 watch content'>
                             <tr>
                                 <td class='td__1'>예매번호</td>
                                 <td class='td__2'>영화제목</td>
@@ -116,7 +132,43 @@
                         $tmp=$db->query("SELECT title FROM movie WHERE mid=(SELECT mid FROM schedule WHERE sid=$sid);");
                         $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
                         $title = $r[0]["title"];
-                        echo "<td class='td__1'>$id</td><td class='td__2'>$title</td><td class='td__3'>$rc_date</td><td class='td__4'>$seats</td><td class='td__5'>$status</td>";
+                        $cancelId = 0;
+                        echo "<td class='td__1'>$id</td>
+                            <td class='td__2'>$title</td>
+                            <td class='td__3'>$rc_date</td>
+                            <td class='td__4'>$seats</td>";
+                    }
+                }
+
+                // 취소 내역 칸
+                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') and status='C';");
+                $results = $q->fetchAll(PDO::FETCH_ASSOC);
+                if($results == null){
+                    echo "<h2 class='bookingL2 cancel content'>취소 내역이 없습니다.</h2>";
+                }
+                else{
+                    echo "<table border='1' class='bookingL3 cancel content'>
+                            <tr>
+                                <td class='td__1'>예매번호</td>
+                                <td class='td__2'>영화제목</td>
+                                <td class='td__3'>예매날짜</td>
+                                <td class='td__4'>좌석 수</td>
+                            </tr>";
+                    foreach($results as $row){
+                        echo "<tr>";
+                        $id = $row["id"];
+                        $rc_date = $row["rc_date"];
+                        $seats = $row["seats"];
+                        $status = $row["status"];
+                        $sid = $row["sid"];
+                        $tmp=$db->query("SELECT title FROM movie WHERE mid=(SELECT mid FROM schedule WHERE sid=$sid);");
+                        $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
+                        $title = $r[0]["title"];
+                        echo "<td class='td__1'>$id</td>
+                            <td class='td__2'>$title</td>
+                            <td class='td__3'>$rc_date</td>
+                            <td class='td__4'>$seats</td>
+                            </tr>";
                     }
                 }
             ?>

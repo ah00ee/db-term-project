@@ -114,7 +114,7 @@ ul{
     width: 500px;
     padding-left: 15px;
 }
-#cList, #rList{
+#cList, #rList, #wList{
     list-style: none;
     float: left;
     border: 1px;
@@ -142,13 +142,17 @@ ul{
     height: 90%;
     padding: 30px;
 }
-.bookingL2{
-    display: none;
-}
 .bookingL{
     text-align: center;
+    margin: auto;
 }
-.cancel content{
+.bookingL2, .bookingL3{
+    display: none;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.cancel content, .watch content{
     display: none;
 }
 .td__1{
@@ -183,4 +187,7 @@ ul{
     border: 1px;
     border-style: solid;
     font-family: monospace;
+}
+#confirmed{
+    text-align: center;
 }
