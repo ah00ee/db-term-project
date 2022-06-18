@@ -49,7 +49,13 @@
                 echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>
                                     <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
         ?>    
-            
+        <?php
+            }
+            else if($conn&&$admin){
+                echo "관리자 님 | <button onclick='location.href=\"manage.php\"'>관리</button>
+                            <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
+        ?>
+
         <?php
             }
             else{

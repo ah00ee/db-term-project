@@ -9,7 +9,7 @@
     $conn = FALSE;
     $admin = FALSE;
     if(isset($_SESSION["ID"])){
-        if($_SESSION["ID"] == "administrator"){
+        if($_SESSION["ID"] == "ad@cnu.ac.kr"){
             // 관리자 계정 확인
             $admin = TRUE;
         }
@@ -29,13 +29,38 @@
     }
 
     function getTheaterScheduleR($db, $tname, $movie, $date){
-        $q = $db->query("SELECT theater.tname, schedule.sid, schedule.sdatetime, theater.seats 
+        $q = array();
+        if($date==""){
+            $q = $db->query("SELECT theater.tname, schedule.sid, schedule.sdatetime, theater.seats 
+                            FROM schedule, theater, movie 
+                            WHERE (schedule.tname=theater.tname AND theater.tname='$tname') 
+                            AND (schedule.mid=movie.mid AND movie.title='$movie');"
+                            );
+        }
+        else{
+            $q = $db->query("SELECT theater.tname, schedule.sid, schedule.sdatetime, theater.seats 
                             FROM schedule, theater, movie 
                             WHERE (schedule.tname=theater.tname AND theater.tname='$tname') 
                             AND (schedule.mid=movie.mid AND movie.title='$movie') 
                             AND (DATE(schedule.sdatetime)=DATE('$date'));"
-                        );
+                            );
+        }
         $results = $q->fetchAll(PDO::FETCH_ASSOC);
         return $results;
+    }
+
+    function getLeftSeats($db, $theater, $sid){
+        // 남은 좌석 수 계산을 위함.
+        // $seats-$max = (상영관의 총 좌석수)-(예매된 좌석 수)
+        // (예매된 좌석 수) = 같은 sid를 가진 티켓팅 내역의 seats의 합. 이때, 취소표는 제외.
+
+        $q = $db->query("SELECT seats FROM theater WHERE tname='$theater';");
+        $results = $q->fetchAll(PDO::FETCH_ASSOC);
+        $seats = $results[0]["seats"];
+        $q = $db->query("SELECT SUM(seats) FROM ticketing WHERE sid=$sid AND status!='C';");
+        $results = $q->fetchAll(PDO::FETCH_ASSOC);
+        $max = $results[0]["SUM(seats)"];
+
+        return array($seats, $max);
     }
 ?>

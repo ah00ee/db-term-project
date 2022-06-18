@@ -104,7 +104,7 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -122,7 +122,7 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -140,7 +140,7 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -158,7 +158,7 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -176,7 +176,7 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, $seats</a></li>";
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }

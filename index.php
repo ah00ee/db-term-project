@@ -4,6 +4,7 @@
         $today = $_SESSION["DATE"];
     }
     else{
+        // 텀프 데모에 한해 오늘 날짜를 '2022-05-05'로 지정.
         $today = '2022-05-05';
     }
 ?>
@@ -33,6 +34,7 @@
             </form>
         </div>
         <?php
+            // 회원 로그인 시
             if($conn&&!$admin){
                 $email = $_SESSION["ID"];
                 $pw = $_SESSION["PWD"];
@@ -42,16 +44,16 @@
                 echo "<div>$name 님 | <button onclick='location.href=\"mypage.php\"'>마이페이지</button>
                                     <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
         ?>    
-            
         <?php
             }
+            // 관리자 로그인 시
             else if($conn&&$admin){
                 echo "관리자 님 | <button onclick='location.href=\"manage.php\"'>관리</button>
                             <button onclick='location.href=\"signout.php\"'>로그아웃</button></div>";
         ?>
-
         <?php
             }
+            // 로그인 전
             else{
         ?>
             <div class="div3" id="signin">
