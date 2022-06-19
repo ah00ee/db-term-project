@@ -104,7 +104,11 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
+
+                        $left = getLeftSeats($db, "t1", $sid);
+                        $seats = $left[0];
+                        $max = $left[1];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t1&title=$t&sche=$sche&sid=$sid'>$sche, ".strval($seats-$max)."/$seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -122,7 +126,11 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
+
+                        $left = getLeftSeats($db, "t2", $sid);
+                        $seats = $left[0];
+                        $max = $left[1];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, ".strval($seats-$max)."/$seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -140,7 +148,11 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
+
+                        $left = getLeftSeats($db, "t3", $sid);
+                        $seats = $left[0];
+                        $max = $left[1];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t3&title=$t&sche=$sche&sid=$sid'>$sche, ".strval($seats-$max)."/$seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -158,7 +170,11 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
+
+                        $left = getLeftSeats($db, "t4", $sid);
+                        $seats = $left[0];
+                        $max = $left[1];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t4&title=$t&sche=$sche&sid=$sid'>$sche, ".strval($seats-$max)."/$seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }
@@ -176,7 +192,11 @@
                         $sche = $row["sdatetime"];
                         $seats = $row["seats"];
                         $sid = $row["sid"];
-                        echo "<li class='sche$t'><a href='booking.php?theater=t2&title=$t&sche=$sche&sid=$sid'>$sche, 총 $seats 좌석</a></li>";
+
+                        $left = getLeftSeats($db, "t5", $sid);
+                        $seats = $left[0];
+                        $max = $left[1];
+                        echo "<li class='sche$t'><a href='booking.php?theater=t5&title=$t&sche=$sche&sid=$sid'>$sche, ".strval($seats-$max)."/$seats 좌석</a></li>";
                     }
                     echo "</ul>";
                 }

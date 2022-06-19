@@ -13,6 +13,7 @@
         $q = $db->exec("UPDATE ticketing SET status='C' WHERE id=$bookId;");
         echo "<script>location.href='http://localhost/mypage.php'</script>";
     }
+    $today = $_SESSION["DATE"];
 ?>
 <html lang="en">
 <head>
@@ -136,7 +137,8 @@
                                 <td class='td__2'>영화제목</td>
                                 <td class='td__3'>상영관</td>
                                 <td class='td__4'>예매날짜</td>
-                                <td class='td__5'>좌석 수</td>
+                                <td class='td__5'>관람날짜</td>
+                                <td class='td__6'>좌석 수</td>
                             </tr>";
                     foreach($results as $row){
                         echo "<tr>";
@@ -145,16 +147,18 @@
                         $seats = $row["seats"];
                         $status = $row["status"];
                         $sid = (int)$row["sid"];
-                        $tmp=$db->query("SELECT m.title, s.tname FROM movie m, schedule s WHERE m.mid=s.mid AND s.sid=$sid;");
+                        $tmp=$db->query("SELECT m.title, s.tname, date(s.sdatetime) FROM movie m, schedule s WHERE m.mid=s.mid AND s.sid=$sid;");
                         $r = $tmp->fetchAll(PDO::FETCH_ASSOC);
                         $title = $r[0]["title"];
                         $tname = $r[0]["tname"];
+                        $sdatetime = $r[0]["date(s.sdatetime)"];
                         $cancelId = 0;
                         echo "<td class='td__1'>$id</td>
                             <td class='td__2'>$title</td>
                             <td class='td__3'>$tname</td>
-                            <td class='td__4'>$rc_date</td>
-                            <td class='td__5'>$seats</td>";
+                            <td class='td__4'>$sdatetime</td>
+                            <td class='td__5'>$rc_date</td>
+                            <td class='td__6'>$seats</td>";
                     }
                 }
 
@@ -172,6 +176,7 @@
                                 <td class='td__3'>상영관</td>
                                 <td class='td__4'>예매날짜</td>
                                 <td class='td__5'>좌석 수</td>
+                                <td class='td__6'>취소날짜</td>
                             </tr>";
                     foreach($results as $row){
                         echo "<tr>";
@@ -189,6 +194,7 @@
                             <td class='td__3'>$tname</td>
                             <td class='td__4'>$rc_date</td>
                             <td class='td__5'>$seats</td>
+                            <td class='td__6'>$today</td>
                             </tr>";
                     }
                 }

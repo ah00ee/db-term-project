@@ -93,7 +93,7 @@
                     }
                     else{
                 ?>
-                <p>선택 좌석 수: <input type="number" name="number" min="1" max="10"></p>
+                <p>선택 좌석 수(최대 10): <input type="number" name="number" min="1" max="10"></p>
                 <?php
                     }
                 ?>
