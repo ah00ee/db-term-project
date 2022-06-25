@@ -73,8 +73,9 @@
                 }
                 else{
                     // 상영 스케줄에 따른 시작일과 종료일 구하기
-                    $q = $db->query("SELECT movie.title, movie.mid, MIN(DATE(schedule.sdatetime)) as min, MAX(DATE(schedule.sdatetime)) as max FROM schedule, movie WHERE movie.mid=schedule.mid AND movie.title='$t' GROUP BY schedule.mid ORDER BY schedule.mid;");
+                    $q = $db->query("SELECT movie.title, movie.open_day, movie.mid, MIN(DATE(schedule.sdatetime)) as min, MAX(DATE(schedule.sdatetime)) as max FROM schedule, movie WHERE movie.mid=schedule.mid AND movie.title='$t' GROUP BY schedule.mid ORDER BY schedule.mid;");
                     $results = $q->fetchAll(PDO::FETCH_ASSOC);
+                    $open = $results[0]["open_day"];
                     $mid = $results[0]["mid"];
                     $minD = $results[0]["min"];
                     $maxD = $results[0]["max"];
@@ -90,7 +91,7 @@
                     }
                     $cnt = $results[0]["COUNT(*)"];
             ?>
-                <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="200">
+                <img src=<?php echo "covers/".str_replace(" ", "_", $t).".jpeg" ?> width="300">
                 <p>
                 <?php
                     // 영화 Description
@@ -103,7 +104,8 @@
                         echo "<h3><상영 완료 스케줄></h3>";
                     }
                     else{
-                        echo "<p id='running'>상영예정| $t<br>예매자 수| $cnt</p>";
+                        $left = (strtotime($open)-strtotime('2022-05-05'))/(24*60*60);
+                        echo "<p id='running'>상영예정 | D-".$left." | $t<br>예매자 수| $cnt</p>";
                         echo "<h3><상영 예정 스케줄></h3>";
                     }
                 ?>

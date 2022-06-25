@@ -136,7 +136,18 @@ ul{
     width: 500px;
     padding-left: 15px;
 }
-.top ul li{
+.lists{
+    width: 90%;
+    height: 90%;
+    margin-top: 20px;
+    margin: auto;
+}
+.top{
+    height: 40px;
+    margin-bottom: 5px;
+    margin: auto;
+}
+.myList{
     list-style: none;
     float: left;
     border: 1px;
@@ -146,23 +157,9 @@ ul{
     text-align: center;
     padding-top: 5px;
 }
-.lists{
-    width: 90%;
-    height: 90%;
-    margin-left: 5%;
-    margin-top: 20px;
-    margin: auto;
-}
-.top{
-    width: 90%;
-    height: 40px;
-    margin-bottom: 5px;
-    margin: auto;
-}
 .list-content1{
     border: 1px;
     border-style: solid;
-    width: 90%;
     height: 90%;
     padding: 30px;
     margin: auto;

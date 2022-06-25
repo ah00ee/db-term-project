@@ -97,7 +97,7 @@
     </div>
     <br>
     <h3 id="confirmed">예매 완료</h3>
-    <button>예매 내역 확인</button>
+    <button onclick="location.href='mypage.php'">예매 내역 확인</button>
     
     <script type="text/javascript" src="js/main.js"></script>
 </body>

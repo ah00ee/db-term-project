@@ -156,8 +156,8 @@
                         echo "<td class='td__1'>$id</td>
                             <td class='td__2'>$title</td>
                             <td class='td__3'>$tname</td>
-                            <td class='td__4'>$sdatetime</td>
-                            <td class='td__5'>$rc_date</td>
+                            <td class='td__4'>$rc_date</td>
+                            <td class='td__5'>$sdatetime</td>
                             <td class='td__6'>$seats</td>";
                     }
                 }
