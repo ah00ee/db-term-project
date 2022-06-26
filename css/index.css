@@ -117,10 +117,18 @@ ul{
 .bar{
     list-style: none;
     border: 1px;
+    border-radius: 5px;
     border-style: solid;
-    width: 400px;
+    width: 300px;
     text-align: center;
     margin: auto;
+}
+.bar:hover{
+    background: lightgray;
+}
+.bar a{
+    text-decoration-line: none;
+    color: black;
 }
 .bookingT{
     margin: auto;
@@ -152,10 +160,15 @@ ul{
     float: left;
     border: 1px;
     border-style: solid;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     width: 33%;
     height: 35px;
     text-align: center;
     padding-top: 5px;
+}
+.myList:hover{
+    background-color: lightgray;
 }
 .list-content1{
     border: 1px;
@@ -165,14 +178,14 @@ ul{
     margin: auto;
 }
 .bookingL{
+    width: fit-content;
     text-align: center;
-    width: 70%;
     margin: auto;
 }
 .bookingL2, .bookingL3{
+    width: fit-content;
     display: none;
     text-align: center;
-    width: 70%;
     margin: auto;
 }
 .cancel content, .watch content{
@@ -242,5 +255,14 @@ ul{
     border: 1px;
     border-style: solid;
     width: 100px;
+    text-align: center;
+}
+.bookingL2 .td__5{
+    width: 200px;
+}
+.contentDate{
+    text-align: center;
+}
+.text{
     text-align: center;
 }

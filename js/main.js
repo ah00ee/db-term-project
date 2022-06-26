@@ -6,10 +6,7 @@ function blankSearch(){
     if(title=="" && date==""){
         return false;
     }
-    else if(title!="" && date!=""){
-        var s = "schedule.php?date="+date;
-        document.formform.action = s;
-    }
+
     return true;
 }
 

@@ -13,6 +13,12 @@
         $q = $db->exec("UPDATE ticketing SET status='C' WHERE id=$bookId;");
         echo "<script>location.href='http://localhost/mypage.php'</script>";
     }
+    if(array_key_exists('start', $_POST)){
+        $start = $_POST['start'];
+    }
+    if(array_key_exists('end', $_POST)){
+        $end = $_POST['end'];
+    }
     $today = $_SESSION["DATE"];
 ?>
 <html lang="en">
@@ -80,17 +86,44 @@
                 <li class="myList cancel" id="cList"  onclick="check(event)">취소 내역</li>
             </ul>
         </div>
+        <!-- 내역 출력 -->
         <div class="list-content1 content">
+            <!-- 시작 및 종료 날짜 설정 및 조회 -->
+            <div class="contentDate">
+                <h4>날짜 조회</h4>
+                <form method="post">
+                    <input type="date" name="start"> 부터
+                    <input type="date" name="end"> 
+
+                    <input type="submit" value="조회">
+                </form>
+            </div>
+            <br><hr><br>
             <?php
                 // 예매 내역 칸
                 $email = $_SESSION["ID"];
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R' ORDER BY rc_date DESC;");
+                if(!empty($_POST['start']) and !empty($_POST['end'])){
+                    echo "<h2 class='bookingL book content text'>".$start."부터 ".$end."까지의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R' AND (rc_date>='$start' AND rc_date<='$end') ORDER BY rc_date DESC;");
+                }
+                else if(!empty($_POST['start'])){
+                    echo "<h2 class='bookingL book content text'>".$start."이후의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R' AND (rc_date>='$start') ORDER BY rc_date DESC;");
+                }
+                else if(!empty($_POST['end'])){
+                    echo "<h2 class='bookingL book content text'>".$end."까지의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R' AND (rc_date<='$end') ORDER BY rc_date DESC;");
+                }
+                else{
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='R' ORDER BY rc_date DESC;");
+                }
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
 
                 if($results == null){
                     echo "<h2 class='bookingL book content'>예매 내역이 없습니다.</h2>";
                 }
                 else{
+                    echo "<h2 class='bookingL book content text'>예매내역</h2>";
                     echo "<table border='1' class='bookingL book content'>
                             <tr>
                                 <td class='td__1'>예매번호</td>
@@ -123,14 +156,31 @@
                 }
 
                 // 지난 관람 내역 칸
-                $email = $_SESSION["ID"];
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W' ORDER BY rc_date DESC;");
+                if(!empty($_POST['start']) and !empty($_POST['end'])){
+                    $start = $_POST['start'];
+                    $end = $_POST['end'];
+                    echo "<h2 class='bookingL2 watch content text'>".$start."부터 ".$end."까지의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W' AND (rc_date>='$start' AND rc_date<='$end') ORDER BY rc_date DESC;");
+                }
+                else if(!empty($_POST['start'])){
+                    $start = $_POST['start'];
+                    echo "<h2 class='bookingL2 watch content text'>".$start."이후의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W' AND (rc_date>='$start') ORDER BY rc_date DESC;");
+                }
+                else if(!empty($_POST['end'])){
+                    echo "<h2 class='bookingL2 watch content text'>".$end."까지의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W' AND (rc_date<='$end') ORDER BY rc_date DESC;");
+                }
+                else{
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='W' ORDER BY rc_date DESC;");
+                }
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
 
                 if($results == null){
                     echo "<h2 class='bookingL2 watch content'>지난 관람 내역이 없습니다.</h2>";
                 }
                 else{
+                    echo "<h2 class='bookingL2 watch content text'>관람 내역</h2>";
                     echo "<table border='1' class='bookingL2 watch content'>
                             <tr>
                                 <td class='td__1'>예매번호</td>
@@ -163,12 +213,31 @@
                 }
 
                 // 취소 내역 칸
-                $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') and status='C' ORDER BY rc_date DESC;");
+                if(!empty($_POST['start']) and !empty($_POST['end'])){
+                    $start = $_POST['start'];
+                    $end = $_POST['end'];
+                    echo "<h2 class='bookingL3 cancel content text'>".$start."부터 ".$end."까지의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='C' AND (rc_date>='$start' AND rc_date<='$end') ORDER BY rc_date DESC;");
+                }
+                else if(!empty($_POST['start'])){
+                    $start = $_POST['start'];
+                    echo "<h2 class='bookingL3 cancel content text'>".$start."이후의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='C' AND (rc_date>='$start') ORDER BY rc_date DESC;");
+                }
+                else if(!empty($_POST['end'])){
+                    $end = $_POST['end'];
+                    echo "<h2 class='bookingL3 cancel content text'>".$end."까지의</h2>";
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='C' AND (rc_date<='$end') ORDER BY rc_date DESC;");
+                }
+                else{
+                    $q=$db->query("SELECT * FROM ticketing WHERE cid=(SELECT cid FROM customer WHERE email='$email') AND status='C' ORDER BY rc_date DESC;");
+                }
                 $results = $q->fetchAll(PDO::FETCH_ASSOC);
                 if($results == null){
                     echo "<h2 class='bookingL3 cancel content'>취소 내역이 없습니다.</h2>";
                 }
                 else{
+                    echo "<h2 class='bookingL3 cancel content text'>취소 내역</h2>";
                     echo "<table border='1' class='bookingL3 cancel content'>
                             <tr>
                                 <td class='td__1'>예매번호</td>
