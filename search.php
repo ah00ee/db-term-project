@@ -96,16 +96,16 @@
                 <?php
                     // 영화 Description
                     if($minD<='2022-05-05' && $maxD>='2022-05-05'){
-                        echo "<p id='running'>상영중| $t<br>누적 관객 수| $max<br>예매자 수| $cnt</p>";
+                        echo "<p id='running'>상영중| $t<br> 개봉일 | $open<br>누적 관객 수| $max<br>예매자 수| $cnt</p>";
                         echo "<h3><상영 스케줄></h3>";
                     }
                     else if($maxD<'2022-05-05'){
-                        echo "<p id='running'>상영종료| $t<br>누적 관객 수| $max</p>";
+                        echo "<p id='running'>상영종료| $t<br> 개봉일 | $open<br>누적 관객 수| $max</p>";
                         echo "<h3><상영 완료 스케줄></h3>";
                     }
                     else{
                         $left = (strtotime($open)-strtotime('2022-05-05'))/(24*60*60);
-                        echo "<p id='running'>상영예정 | D-".$left." | $t<br>예매자 수| $cnt</p>";
+                        echo "<p id='running'>상영예정 | D-".$left." | $t<br> 개봉일 | $open<br>예매자 수| $cnt</p>";
                         echo "<h3><상영 예정 스케줄></h3>";
                     }
                 ?>
